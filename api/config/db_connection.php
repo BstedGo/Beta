@@ -7,24 +7,25 @@ echo $addition;
 
 */
 
-//crear variables de conectividad
-$servername = "localhost"; //127.0.0.1
+$host = "localhost";
 
-$username = "postgres";      
-
-$password = "unicesmag"; 
+$port = "5432"; 
 
 $dbname = "beta";
 
-$port ="5432";
- 
-//crear conección
-$conn = pg_connect(
-    $dbname, 
-    $host, 
-    $username, 
-    $password, 
-    $port);
+$username = "postgres";
+
+$password = "unicesmag";
+
+//crear variables de conectividad
+$data_connection = "
+host = $host
+port = $port
+dbname = $dbname
+user = $username
+password = $password";
+
+$conn =pg_connect($data_connection);
 
     //verificar conectividad
     if (!$conn) {
