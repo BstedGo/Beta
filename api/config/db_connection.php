@@ -31,12 +31,13 @@ $conn =pg_connect($data_connection);
     if (!$conn) {
         die("Connection failed: ". pg_last_error());
     }
-    else {echo "Connection successfully";
+    else {
+        // echo "Connection successfully";
     }
     
     
     //cerrar la conexion
 
-    pg_close($conn);
+    //pg_close($conn);
 
 ?>
