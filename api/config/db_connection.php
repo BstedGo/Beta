@@ -25,7 +25,7 @@ dbname = $dbname
 user = $username
 password = $password";
 
-$conn =pg_connect($data_connection);
+$conn = pg_connect($data_connection);
 
     //verificar conectividad
     if (!$conn) {

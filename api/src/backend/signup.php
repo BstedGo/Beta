@@ -11,21 +11,25 @@
     
     $options = [
        'http' => [
-          'header' => "Content-Type: application/json\r\nAuthorization: Bearer $SUPABASE_KEY",
+          'header' => [
+            "Content-Type: application/json", 
+            "Authorization: Bearer $SUPABASE_KEY", 
+            "apikey: $SUPABASE_KEY"
+         ],
           'method'=> 'POST',
-          'content' => json_decode($data),
+          'content' => json_encode($data),
        ],
     ];
 
     $context = stream_context_create($options);
-    $response = file_get_contents($url, false, $context);
-    $response_data = json_decode($response, true);
+    $response = file_get_contents($url, true, $context);
+    //$response_data = json_encode($response, true);
 
     if($response === false) {
        echo "Error: Unable to save data to Supabase";
-       exist;
+       exit;
     }
-    echo "User has been created." . json_encode($response_data);
+    echo "User has been created." ; //json_encode($response_data);
  }
 
 
@@ -62,6 +66,7 @@
     $result = pg_query($conn, $query);
 
         if ($result){
+            save_data_supabase($email, $enc_pass);
             echo "<script>alert('Registration succesfull')</script>";
             header('refresh:0; url=http://127.0.0.1/beta/api/src/login_form.html');
         } else {
@@ -69,5 +74,6 @@
         }
     
         pg_close($conn);
+
 
 ?>
